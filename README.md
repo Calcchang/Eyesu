@@ -6,12 +6,11 @@ Eyesu is a spinoff of the reaction based game osu! where instead of the user usi
 
 ## Features
 
-- Eye tracking for cursor movement
-- Automatic calibration system
+- Eye tracking for crosshair movement
+- Initial calibration system
 - Score and combo tracking
 - Visual feedback for hit accuracy (Perfect, Great, OK, Meh, Miss)
-- Multiple circles can appear simultaneously
-- Clean visual interface with feedback messages
+- CIRCLES!!!!
 
 ## Requirements
 
@@ -19,7 +18,7 @@ Eyesu is a spinoff of the reaction based game osu! where instead of the user usi
 - OpenCV (`cv2`)
 - MediaPipe
 - NumPy
-- A webcam or camera connected to your computer
+- A webcam or a externally connected camera
 
 ## Installation
 
@@ -41,7 +40,7 @@ python eye_controlled_osu.py
 
 ### Setup and Calibration
 
-1. Launch the game and press any key to start calibration.
+1. Launch the game and DON'T MOVE YOUR HEAD UNTIL CALIBRATION IS COMPLETE.
 2. During calibration, keep your head still and look straight at the camera.
 3. The system will calibrate based on your eye position for about 60 frames.
 
@@ -49,47 +48,35 @@ python eye_controlled_osu.py
 
 - **Eye Movement**: Move your eyes to control the cursor on the screen
 - **Spacebar**: Click to hit circles
-- **Close Both Eyes** (for approximately 1 second): Exit the game
 - **Q key**: Quit the game
 
 ### Gameplay
 
 1. Circles will appear randomly on the screen.
 2. Move your gaze to position the cursor over the circles.
-3. Press the spacebar when the approach circle aligns with the main circle.
+3. Press the spacebar when the outer ring and the circle seem to intersect
 4. Your score depends on timing:
-   - **PERFECT**: +300 points (extremely precise timing)
-   - **GREAT**: +200 points (very good timing)
+   - **PERFECT**: +300 points (very precise timing)
+   - **GREAT**: +200 points (good timing)
    - **OK**: +100 points (decent timing)
-   - **MEH**: +50 points (poor timing)
+   - **MEH**: +50 points (mid timing)
    - **MISS**: -100 points (circle disappeared without being clicked)
-5. Your combo increases with each successful hit and resets to 0 when you miss.
-
-## Technical Details
-
-- Uses MediaPipe's Face Mesh for precise eye tracking
-- Tracks iris position relative to calibrated center point
-- Applies smoothing to cursor movement for better usability
-- Implements a scoring system based on timing accuracy
-- Features visual feedback messages for hit quality
+5. Your combo is similar to your hit streak, if you miss a circle then your combo resets to 0
 
 ## Tips
 
-- Make sure you have adequate lighting for better face detection.
-- Calibrate in a comfortable position that you can maintain while playing.
-- Adjust your distance from the camera for optimal tracking.
-- The game works best when your face is fully visible and well-lit.
+- Make sure you have good lighting for better face detection.
+- Calibrate in a comfortable position and ensure your head is centered in the frame
+- Adjust your distance from the camera for optimal tracking. (Most normal sitting distances should be fine)
 
 ## Troubleshooting
 
-- If eye tracking seems inaccurate, try recalibrating by restarting the game.
-- Ensure your webcam has a clear view of your face.
-- If the game runs slowly, close other resource-intensive applications.
-- Adjust the `EYE_MOVEMENT_MULTIPLIER` constant in the code if cursor movement is too sensitive or not sensitive enough.
+- Try recalibrating by restarting the game if the crosshair seems off or miscentered
+- Adjust the `EYE_MOVEMENT_MULTIPLIER` constant in the code if cursor movement is too sensitive or not sensitive enough. (I hardcoded it to my specific window size)
 
 ## Customization
 
-You can modify various game parameters in the code:
+You can modify these game parameters in the code for customization:
 
 - `CIRCLE_RADIUS`: Size of the hit circles
 - `CIRCLE_LIFETIME`: How long circles remain on screen
@@ -97,11 +84,7 @@ You can modify various game parameters in the code:
 - `EYE_MOVEMENT_MULTIPLIER`: Sensitivity of eye tracking
 - Scoring windows and point values
 
-## License
-
-This project is provided as open-source software. Feel free to modify and distribute it according to your needs.
-
-## Acknowledgments
+## Credits
 
 - Inspired by the original OSU! rhythm game
 - Uses MediaPipe for face tracking technology
