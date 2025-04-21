@@ -1,5 +1,7 @@
 # Eyesu
 
+![Demo gif](Eyesu-demo.gif)
+
 ## Overview
 
 Eyesu is a spinoff of the reaction based game osu! where instead of the user using their cursor to go to the circles, they use their head movements to move their crosshair, and space to "hit" the targets.
