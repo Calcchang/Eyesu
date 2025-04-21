@@ -35,7 +35,7 @@ CLICK_KEY = ord(' ')
 CLICK_COOLDOWN = 0.2
 
 # Eye movement sensitivity
-EYE_MOVEMENT_MULTIPLIER = 5.0
+EYE_MOVEMENT_MULTIPLIER = 6.0
 
 # OSU Game parameters
 CIRCLE_RADIUS = 50
@@ -70,7 +70,6 @@ feedback_messages = []  # List of (x, y, message, color, birth_time)
 # Variables for tracking
 calibration_frames = 0
 center_x, center_y = 0, 0
-both_eyes_closed_frames = 0
 
 def get_iris_center(landmarks, iris_indices):
     iris_points = []
@@ -261,7 +260,6 @@ print("Keep your head still during calibration.")
 print("Controls:")
 print("- Move eyes to control cursor")
 print("- Press SPACEBAR to hit circles")
-print("- Close both eyes for 1 second to quit")
 print("- Press 'q' to quit")
 
 try:
@@ -298,20 +296,6 @@ try:
                         cv2.FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 2)
         if results.multi_face_landmarks:
             face_landmarks = results.multi_face_landmarks[0].landmark
-            left_ear = calculate_eye_aspect_ratio(face_landmarks, LEFT_EYE)
-            right_ear = calculate_eye_aspect_ratio(face_landmarks, RIGHT_EYE)
-            BLINK_THRESHOLD = 0.2
-            both_eyes_closed = left_ear < BLINK_THRESHOLD and right_ear < BLINK_THRESHOLD
-            if both_eyes_closed:
-                both_eyes_closed_frames += 1
-                if game_active:
-                    cv2.putText(frame, "BOTH EYES CLOSED", (frame_w//2-100, 30), 
-                           cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-            else:
-                both_eyes_closed_frames = 0
-            if both_eyes_closed_frames > 15:
-                print("Eyes closed - exiting program")
-                break
             left_iris_center = get_iris_center(face_landmarks, LEFT_IRIS)
             right_iris_center = get_iris_center(face_landmarks, RIGHT_IRIS)
             iris_x = (left_iris_center[0] + right_iris_center[0]) / 2
